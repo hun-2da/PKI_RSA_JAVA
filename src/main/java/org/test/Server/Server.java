@@ -1,6 +1,9 @@
 package org.test.Server;
 
 
+import org.test.SecurityDirectory.RSA.CryptoHandler;
+import org.test.SecurityDirectory.RSA.KeyGeneration;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -8,6 +11,13 @@ import java.util.*;
 
 
 public class Server {
+
+    private static  KeyGeneration ServerKey = null;
+
+    static{
+        ServerKey = new KeyGeneration();
+    }
+
     private static int ClientCount = 0;
     private static final int PORT = 12345;
 
@@ -16,6 +26,11 @@ public class Server {
     //  client handler 를 관리할 리스트 _ 단일 스레드만 접근할 수 있게끔 안전하게 관리
 
     public static void main(String[] args) {
+
+
+        CryptoHandler cryptoHandler = new CryptoHandler();
+
+
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {
             System.out.println("서버 실행 중. 포트: " + PORT);
 
