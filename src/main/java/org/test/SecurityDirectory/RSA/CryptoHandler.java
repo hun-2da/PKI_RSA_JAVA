@@ -4,6 +4,7 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import java.nio.charset.StandardCharsets;
 import java.security.*;
 
 /**RSA 암호화 및 복호화 클레스*/
@@ -41,11 +42,11 @@ public class CryptoHandler {
     }
     /**key 복호화를 위한 메소드
      * 암호화 데이터(byte[])와 private Key로 복호화 진행*/
-    public byte[] Message_Decryption(byte[] encryptedData, PrivateKey privateKey){
+    public String Message_Decryption(byte[] encryptedData, PrivateKey privateKey){
         try {
             cipher.init(Cipher.DECRYPT_MODE, privateKey);
             byte[] decryptedData = cipher.doFinal(encryptedData);
-            return decryptedData;
+            return new String(decryptedData, StandardCharsets.UTF_8);
 
         } catch (InvalidKeyException e) {
             throw new RuntimeException(e);

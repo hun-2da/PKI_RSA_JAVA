@@ -4,6 +4,9 @@ import java.security.*;
 
 public class KeyGeneration {
     private KeyPair User_RSA_Key;
+    public KeyGeneration() {
+        User_RSAKey_Registration();
+    }
 
     public void User_RSAKey_Registration() {
         // 1. RSA KeyPairGenerator 생성
